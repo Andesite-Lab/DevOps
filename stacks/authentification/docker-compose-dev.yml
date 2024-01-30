@@ -1,0 +1,93 @@
+version: '3.8'
+name: authentification
+services:
+
+  auth:
+    image: necrelox/andesite-authentification:latest
+    container_name: auth
+    restart: unless-stopped
+    depends_on:
+      auth-database:
+        condition: service_healthy
+      auth-dragonfly:
+        condition: service_started
+    environment:
+      HOST: "${HOST}"
+      HTTP_PORT: "${HTTP_PORT}"
+      WS_PORT: "${WS_PORT}"
+      ORIGINS: "${ORIGINS}"
+      PREFIX: "${PREFIX}"
+      COOKIE_SECRET: "${COOKIE_SECRET}"
+      DB_HOST: "${DB_HOST}"
+      DB_NAME: "${DB_NAME}"
+      DB_USER: "${DB_USER}"
+      DB_PASSWORD: "${DB_PASSWORD}"
+      DB_PORT: "${DB_PORT}"
+      DRAGONFLY_HOST: "${DRAGONFLY_HOST}"
+      DRAGONFLY_PORT: "${DRAGONFLY_PORT}"
+      RED_PANDA_BROKERS: "${RED_PANDA_BROKERS}"
+      NODE_ENV: "development"
+    networks:
+      - auth-database-network
+      - auth-dragonfly-network
+      - red-panda_broker-network
+    ports:
+      - "7000:7000"
+
+######## STORE ##########
+  auth-dragonfly:
+    container_name: dragonfly
+    image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
+    restart: unless-stopped
+    ulimits:
+      memlock: -1
+    volumes:
+      - dragonfly-data:/data
+    networks:
+      - auth-dragonfly-network
+    expose:
+      - "6379"
+    ports:
+      - "6379:6379"
+#########################
+
+####### Database ########
+  auth-database:
+    container_name: auth-database
+    image: postgres:alpine
+    restart: unless-stopped
+    healthcheck:
+      test: pg_isready -U ${DB_USER} -d ${DB_NAME} -p ${DB_PORT}
+      interval: 5s
+      retries: 5
+      timeout: 5s
+    environment:
+      POSTGRES_DB: "${DB_NAME}"
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+    command: -p ${DB_PORT}
+    volumes:
+      - auth-database-data:/var/lib/postgresql/data
+    networks:
+      - auth-database-network
+    expose:
+      - "7050"
+    ports:
+      - "7050:7050"
+#########################
+
+##### DOCKER NETWORK ####
+networks:
+  auth-dragonfly-network:
+    driver: bridge
+  auth-database-network:
+    driver: bridge
+  red-panda_broker-network:
+    external: true
+#########################x
+
+##### DOCKER VOLUME #####
+volumes:
+  dragonfly-data:
+  auth-database-data:
+#########################
