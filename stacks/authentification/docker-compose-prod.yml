@@ -3,7 +3,7 @@ name: authentification
 services:
 
   auth:
-    image: necrelox/andesite-authentification:latest
+    image: necrelox/andesite-authentication:latest
     container_name: auth
     restart: unless-stopped
     depends_on:
@@ -26,7 +26,7 @@ services:
       DRAGONFLY_HOST: "${DRAGONFLY_HOST}"
       DRAGONFLY_PORT: "${DRAGONFLY_PORT}"
       RED_PANDA_BROKERS: "${RED_PANDA_BROKERS}"
-      NODE_ENV: "development"
+      NODE_ENV: "production"
     networks:
       - auth-database-network
       - auth-dragonfly-network
