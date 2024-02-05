@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/Andesite-Lab/DevOps/compare/v1.0.0...v1.0.1) (2024-02-05)
+
+
+### Continuous Integration
+
+* improve, correction .. ([293626e](https://github.com/Andesite-Lab/DevOps/commit/293626e59aea2166f338a09e10988b1675bcfc43))
+
 ## 1.0.0 (2024-01-31)
 
 
