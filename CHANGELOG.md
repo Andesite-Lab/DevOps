@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/Andesite-Lab/DevOps/compare/v1.1.0...v1.1.1) (2024-02-10)
+
+
+### Bug Fixes
+
+* add env variable AUTH_SERVICE_URL ([1b269c0](https://github.com/Andesite-Lab/DevOps/commit/1b269c0868cd0a2f16bbf9b14aea79db00cfc3b7))
+
 ## [1.1.0](https://github.com/Andesite-Lab/DevOps/compare/v1.0.1...v1.1.0) (2024-02-10)
 
 
