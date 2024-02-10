@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/Andesite-Lab/DevOps/compare/v1.1.2...v1.1.3) (2024-02-10)
+
+
+### Bug Fixes
+
+* add domain env variable ([4f99b83](https://github.com/Andesite-Lab/DevOps/commit/4f99b831d31da44152b0971670d29698e7506da9))
+
 ## [1.1.2](https://github.com/Andesite-Lab/DevOps/compare/v1.1.1...v1.1.2) (2024-02-10)
 
 
