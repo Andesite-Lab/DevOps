@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/Andesite-Lab/DevOps/compare/v1.1.1...v1.1.2) (2024-02-10)
+
+
+### Bug Fixes
+
+* add env variable smtp ([5460ebc](https://github.com/Andesite-Lab/DevOps/commit/5460ebc0ace9fc976b057d545b86501db02dced7))
+
 ## [1.1.1](https://github.com/Andesite-Lab/DevOps/compare/v1.1.0...v1.1.1) (2024-02-10)
 
 
