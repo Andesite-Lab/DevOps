@@ -22,6 +22,8 @@ services:
       DB_PORT: "${DB_PORT}"
       RED_PANDA_BROKERS: "${RED_PANDA_BROKERS}"
       NODE_ENV: "production"
+      SMTP_USER: "${SMTP_USER}"
+      SMTP_PASSWORD: "${SMTP_PASSWORD}"
     networks:
       - mailer-database-network
       - red-panda_broker-network
