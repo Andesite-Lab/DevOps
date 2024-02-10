@@ -1,5 +1,5 @@
 version: '3.8'
-name: authentification
+name: authentication
 services:
 
   auth:
@@ -12,12 +12,10 @@ services:
       auth-dragonfly:
         condition: service_started
     environment:
-      HOST: "${HOST}"
       HTTP_PORT: "${HTTP_PORT}"
       WS_PORT: "${WS_PORT}"
       ORIGINS: "${ORIGINS}"
       PREFIX: "${PREFIX}"
-      COOKIE_SECRET: "${COOKIE_SECRET}"
       DB_HOST: "${DB_HOST}"
       DB_NAME: "${DB_NAME}"
       DB_USER: "${DB_USER}"
@@ -32,6 +30,9 @@ services:
       - auth-dragonfly-network
       - red-panda_broker-network
       - portainer_proxy-network
+    expose:
+      - "${HTTP_PORT}"
+      - "${WS_PORT}"
 
 ######## STORE ##########
   auth-dragonfly:

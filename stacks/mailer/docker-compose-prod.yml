@@ -1,0 +1,70 @@
+version: '3.8'
+name: mailer
+services:
+
+  mailer:
+    image: necrelox/andesite-mailer:latest
+    container_name: mailer
+    restart: unless-stopped
+    depends_on:
+      mailer-database:
+        condition: service_healthy
+    environment:
+      HTTP_PORT: "${HTTP_PORT}"
+      WS_PORT: "${WS_PORT}"
+      ORIGINS: "${ORIGINS}"
+      PREFIX: "${PREFIX}"
+      DB_HOST: "${DB_HOST}"
+      DB_NAME: "${DB_NAME}"
+      DB_USER: "${DB_USER}"
+      DB_PASSWORD: "${DB_PASSWORD}"
+      DB_PORT: "${DB_PORT}"
+      RED_PANDA_BROKERS: "${RED_PANDA_BROKERS}"
+      NODE_ENV: "production"
+    networks:
+      - mailer-database-network
+      - red-panda_broker-network
+      - portainer_proxy-network
+    expose:
+      - "${HTTP_PORT}"
+      - "${WS_PORT}"
+
+####### Database ########
+  mailer-database:
+    container_name: mailer-database
+    image: postgres:alpine
+    restart: unless-stopped
+    healthcheck:
+      test: pg_isready -U ${DB_USER} -d ${DB_NAME} -p ${DB_PORT}
+      interval: 5s
+      retries: 5
+      timeout: 5s
+    environment:
+      POSTGRES_DB: "${DB_NAME}"
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+    command: -p ${DB_PORT}
+    volumes:
+      - mailer-database-data:/var/lib/postgresql/data
+    networks:
+      - mailer-database-network
+    expose:
+      - "7150"
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+#########################
+
+##### DOCKER NETWORK ####
+networks:
+  mailer-database-network:
+    driver: bridge
+  red-panda_broker-network:
+    external: true
+  portainer_proxy-network:
+    external: true
+#########################x
+
+##### DOCKER VOLUME #####
+volumes:
+  mailer-database-data:
+#########################
