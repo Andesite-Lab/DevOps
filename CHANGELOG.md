@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/Andesite-Lab/DevOps/compare/v1.0.1...v1.1.0) (2024-02-10)
+
+
+### Features
+
+* add mailer and improvements ([dff478e](https://github.com/Andesite-Lab/DevOps/commit/dff478e94013dce3a7d0fab5e359b9b6d3a9b51a))
+
 ## [1.0.1](https://github.com/Andesite-Lab/DevOps/compare/v1.0.0...v1.0.1) (2024-02-05)
 
 
