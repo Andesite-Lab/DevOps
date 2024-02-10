@@ -10,6 +10,7 @@ services:
       mailer-database:
         condition: service_healthy
     environment:
+      DOMAIN: "${DOMAIN}"
       HTTP_PORT: "${HTTP_PORT}"
       WS_PORT: "${WS_PORT}"
       ORIGINS: "${ORIGINS}"
