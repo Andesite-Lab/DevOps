@@ -1,5 +1,5 @@
 version: '3.8'
-name: authentification
+name: authentication
 services:
 
 ######## STORE ##########
@@ -53,7 +53,7 @@ services:
     expose:
       - "7050"
     ports:
-      - "7050:7050"
+      - "${DB_PORT}:${DB_PORT}"
 #########################
 
 ##### DOCKER NETWORK ####

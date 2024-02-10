@@ -1,0 +1,43 @@
+version: '3.8'
+name: mailer
+services:
+
+####### Database ########
+  mailer-database:
+    container_name: mailer-database
+    image: postgres:alpine
+    restart: unless-stopped
+    healthcheck:
+      test: pg_isready -U ${DB_USER} -d ${DB_NAME} -p ${DB_PORT}
+      interval: 5s
+      retries: 5
+      timeout: 5s
+    environment:
+      POSTGRES_DB: "${DB_NAME}"
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+    command: -p ${DB_PORT}
+    volumes:
+      - mailer-database-data:/var/lib/postgresql/data
+    networks:
+      - mailer-database-network
+    expose:
+      - "7150"
+    ports:
+      - "7150:7150"
+#########################
+
+##### DOCKER NETWORK ####
+networks:
+  mailer-dragonfly-network:
+    driver: bridge
+  mailer-database-network:
+    driver: bridge
+  red-panda_broker-network:
+    external: true
+#########################x
+
+##### DOCKER VOLUME #####
+volumes:
+  mailer-database-data:
+#########################
