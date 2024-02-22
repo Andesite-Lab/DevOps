@@ -15,12 +15,11 @@ services:
       HTTP_PORT: "${HTTP_PORT}"
       WS_PORT: "${WS_PORT}"
       ORIGINS: "${ORIGINS}"
-      PREFIX: "${PREFIX}"
-      DB_HOST: "${DB_HOST}"
-      DB_NAME: "${DB_NAME}"
-      DB_USER: "${DB_USER}"
-      DB_PASSWORD: "${DB_PASSWORD}"
-      DB_PORT: "${DB_PORT}"
+      BASE_URL: "${BASE_URL}"
+      DB_SERVER_HOST: "${DB_SERVER_HOST}"
+      DB_SERVER_USER: "${DB_SERVER_USER}"
+      DB_SERVER_PASSWORD: "${DB_SERVER_PASSWORD}"
+      DB_SERVER_PORT: "${DB_SERVER_PORT}"
       DRAGONFLY_HOST: "${DRAGONFLY_HOST}"
       DRAGONFLY_PORT: "${DRAGONFLY_PORT}"
       RED_PANDA_BROKERS: "${RED_PANDA_BROKERS}"
@@ -55,21 +54,21 @@ services:
     image: postgres:alpine
     restart: unless-stopped
     healthcheck:
-      test: pg_isready -U ${DB_USER} -d ${DB_NAME} -p ${DB_PORT}
+      test: pg_isready -U ${DB_SERVER_USER} -d authentication -p ${DB_SERVER_PORT}
       interval: 5s
       retries: 5
       timeout: 5s
     environment:
-      POSTGRES_DB: "${DB_NAME}"
-      POSTGRES_USER: "${DB_USER}"
-      POSTGRES_PASSWORD: "${DB_PASSWORD}"
-    command: -p ${DB_PORT}
+      POSTGRES_DB: "authentication"
+      POSTGRES_USER: "${DB_SERVER_USER}"
+      POSTGRES_PASSWORD: "${DB_SERVER_PASSWORD}"
+    command: -p ${DB_SERVER_PORT}
     volumes:
       - auth-database-data:/var/lib/postgresql/data
     networks:
       - auth-database-network
     expose:
-      - "7050"
+      - "${DB_SERVER_PORT}"
 #########################
 
 ##### DOCKER NETWORK ####

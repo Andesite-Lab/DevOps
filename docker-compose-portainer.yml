@@ -42,12 +42,12 @@ services:
     expose:
       - "3306"
     networks:
-      - proxy-network
+      - proxy-db-network
   #########################
 
   ####### Portainer #######
   portainer:
-    image: portainer/portainer-ee:alpine
+    image: portainer/portainer-ce:alpine
     container_name: portainer
     restart: unless-stopped
     command: -H unix:///var/run/docker.sock

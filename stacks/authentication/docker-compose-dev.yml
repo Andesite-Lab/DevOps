@@ -21,7 +21,7 @@ services:
 
   redisinsight:
     container_name: redisinsight
-    image: redislabs/redisinsight:latest
+    image: redislabs/redisinsight:1.14.0
     restart: unless-stopped
     environment:
       RIPROXYPATH: "/redisinsight"
@@ -37,23 +37,24 @@ services:
     image: postgres:alpine
     restart: unless-stopped
     healthcheck:
-      test: pg_isready -U ${DB_USER} -d ${DB_NAME} -p ${DB_PORT}
+      test: pg_isready -U ${DB_SERVER_USER} -d authentication -p ${DB_SERVER_PORT}
       interval: 5s
       retries: 5
       timeout: 5s
     environment:
-      POSTGRES_DB: "${DB_NAME}"
-      POSTGRES_USER: "${DB_USER}"
-      POSTGRES_PASSWORD: "${DB_PASSWORD}"
-    command: -p ${DB_PORT}
+      POSTGRES_DB: "authentication"
+      POSTGRES_USER: "${DB_SERVER_USER}"
+      POSTGRES_PASSWORD: "${DB_SERVER_PASSWORD}"
+    command: -p ${DB_SERVER_PORT}
     volumes:
       - auth-database-data:/var/lib/postgresql/data
     networks:
       - auth-database-network
     expose:
-      - "7050"
+      - "${DB_SERVER_PORT}"
     ports:
-      - "${DB_PORT}:${DB_PORT}"
+      - "${DB_SERVER_PORT}:${DB_SERVER_PORT}"
+
 #########################
 
 ##### DOCKER NETWORK ####
