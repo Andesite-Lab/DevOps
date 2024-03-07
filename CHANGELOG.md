@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.4](https://github.com/Andesite-Lab/DevOps/compare/v1.1.3...v1.1.4) (2024-03-07)
+
+
+### Bug Fixes
+
+* newtork correction ([6ac829c](https://github.com/Andesite-Lab/DevOps/commit/6ac829cc646bbecdb5a21182f1b062e3c8b97a86))
+
 ## [1.1.3](https://github.com/Andesite-Lab/DevOps/compare/v1.1.2...v1.1.3) (2024-02-10)
 
 
