@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/Andesite-Lab/DevOps/compare/v1.1.4...v1.2.0) (2024-03-10)
+
+
+### Features
+
+* add red panda preprod stack ([e612c27](https://github.com/Andesite-Lab/DevOps/commit/e612c277a73748c955ab923844063a66bc12fca9))
+
 ## [1.1.4](https://github.com/Andesite-Lab/DevOps/compare/v1.1.3...v1.1.4) (2024-03-07)
 
 
